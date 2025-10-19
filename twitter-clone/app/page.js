@@ -2,6 +2,7 @@
 
 import TweetCard from "@/components/TweetCard";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
   const Home =  () => {
   const [tweets, setTweets] = useState([]);
@@ -21,7 +22,9 @@ import { useEffect, useState } from "react";
         {tweets &&
           tweets.posts &&
             tweets.posts.map((tweet) => (
-              <TweetCard key={tweet.id} tweet={tweet}/>
+              <Link key={tweet.id} href={`/tweet/${tweet.id}`}>
+                <TweetCard key={tweet.id} tweet={tweet}/>
+              </Link>
             ))
         }    
         <div className="flex gap-4 items-center flex-col sm:flex-row">

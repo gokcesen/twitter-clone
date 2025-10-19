@@ -8,6 +8,10 @@ const TweetCard = ({ tweet }) => {
               >
                 <h2 className="font-bold text-lg mb-2">{tweet.title}</h2>
                 <p className="text-gray-700">{tweet.body}</p>
+                <p className="text-gray-700">
+                    Likes: {tweet.reactions.likes}    Dislikes: {tweet.reactions.dislikes}
+                </p>
+                <p>Tags: #{tweet.tags.join(', #')}</p>
               </div>
         </>
     );
