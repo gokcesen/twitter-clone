@@ -1,13 +1,9 @@
 'use client';
 
+import TweetCard from "@/components/TweetCard";
 import { useEffect, useState } from "react";
 
-const getTweets = async () => {
-  const res = await fetch('https://dummyjson.com/posts');
-  return res.json();
-}
-
- const Home =  () => {
+  const Home =  () => {
   const [tweets, setTweets] = useState([]);
 
   const fetchTweets = async () => {
@@ -25,13 +21,7 @@ const getTweets = async () => {
         {tweets &&
           tweets.posts &&
             tweets.posts.map((tweet) => (
-              <div
-               key={tweet.id}
-               className="border border-gray-300 rounded-lg p-4 w-[400px]"
-              >
-                <h2 className="font-bold text-lg mb-2">{tweet.title}</h2>
-                <p className="text-gray-700">{tweet.body}</p>
-              </div>
+              <TweetCard key={tweet.id} tweet={tweet}/>
             ))
         }    
         <div className="flex gap-4 items-center flex-col sm:flex-row">
