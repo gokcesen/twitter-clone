@@ -4,6 +4,7 @@ import TweetCard from "@/components/TweetCard";
 import Header from "@/components/Header";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
   const Home =  () => {
   const [tweets, setTweets] = useState([]);
@@ -33,9 +34,8 @@ import Link from "next/link";
          
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+      <Footer />
   
-      </footer>
     </div>
   );
 }
