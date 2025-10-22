@@ -11,6 +11,7 @@ const getTweet = async (id) => {
 }
 
 const TweetDetails = async ({ params }) => {
+    params = await params
     const tweet = await getTweet(params.id);
 
     if (!tweet) {
