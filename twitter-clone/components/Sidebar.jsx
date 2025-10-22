@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { HiOutlineHome, HiOutlineSearch, HiOutlineBookmark, HiOutlineUser } from "react-icons/hi";
 import Image from 'next/image';
 import logo from '/public/images/x-logo.png';
+import { FiUser } from "react-icons/fi";
+
 
 <Image src={logo} alt="Logo" width={40} height={40} />
 
@@ -37,7 +39,16 @@ export default function Sidebar() {
             <link.icon size={24} />
             <span>{link.name}</span>
         </Link>
-      ))}
+        ))}
+        <div className="flex items-center space-x-3 p-2 hover:bg-gray-900 rounded cursor-pointer mt-auto">
+            <div className="w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center">
+                <FiUser size={24} className="text-white" />
+            </div>
+            <div className="flex flex-col">
+                <span className="font-semibold">John Doe</span>
+                <span className="text-sm text-gray-400">@johndoe</span>
+            </div>
+        </div>
     </aside>
   );
 }
