@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import TweetCard from "@/components/TweetCard";
+import { FaArrowLeft } from "react-icons/fa";
 
 const getTweet = async (id) => {
     const res = await fetch(`https://dummyjson.com/posts/${id}`);
@@ -19,12 +20,18 @@ const TweetDetails = async ({ params }) => {
       }
 
     return(
-        <main>
-            <TweetCard tweet={tweet} />
-            <Link href='/' >
-                Back to Feed
-            </Link>
-        </main>
+        <main className="flex flex-col items-start ml-[500px] mt-8 gap-4">
+            <div className="flex flex-row items-center">
+                <Link href="/" className=" top-4 left-4 flex items-start gap-2 bg-[#0a0a0a] text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition-colors ">
+                    <FaArrowLeft size={20} className="text-white drop-shadow-md" /> 
+                </Link>
+                <span className="text-xl font-bold ml-2"> Post </span>
+            </div>
+            <div className="mt-2">
+                <TweetCard className="w-full" tweet={tweet} />
+            </div>
+      </main>
+      
     );
 
 } 
