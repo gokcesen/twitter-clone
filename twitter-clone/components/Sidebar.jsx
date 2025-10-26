@@ -6,6 +6,9 @@ import { HiOutlineHome, HiOutlineSearch, HiOutlineBookmark, HiOutlineUser } from
 import Image from 'next/image';
 import logo from '/public/images/x-logo.png';
 import { FiUser } from "react-icons/fi";
+import { useState } from "react";
+import CreateTweetModal from "@/components/CreateTweetModal";
+
 
 
 <Image src={logo} alt="Logo" width={40} height={40} />
@@ -20,6 +23,7 @@ const navLinks = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <aside className="fixed top-0 left-36 h-screen w-[300px] bg-[#0a0a0a] border-r border-zinc-800 text-white flex flex-col items-start p-6 space-y-4 shadow-lg">
@@ -40,6 +44,14 @@ export default function Sidebar() {
             <span>{link.name}</span>
         </Link>
         ))}
+        <button
+        onClick={() => setShowModal(true)}
+        className="bg-white text-black font-bold py-2 px-4 border rounded-3xl w-full h-12"
+      >
+        Post
+      </button>
+      <CreateTweetModal show={showModal} onClose={() => setShowModal(false)} />
+
         <div className="flex items-center space-x-3 p-2 hover:bg-gray-900 rounded cursor-pointer mt-auto">
             <div className="w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center">
                 <FiUser size={24} className="text-white" />
