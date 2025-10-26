@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import TopTweetsPanel from "@/components/TopTweetsPanel";
+import Sidebar from "@/components/Sidebar";
 
   const Home =  () => {
   const [tweets, setTweets] = useState([]);
@@ -34,7 +35,7 @@ import TopTweetsPanel from "@/components/TopTweetsPanel";
             ))
         }   
         </div> 
-        <TopTweetsPanel className="w-[600px] border-l border-zinc-800 p-6 ml-10" />
+        <TopTweetsPanel className="w-[600px] border-l border-zinc-800 p-6 ml-10" tweets={tweets}/>
       </main>
       
 
