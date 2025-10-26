@@ -1,4 +1,5 @@
 import LikeButton from "./LikeButton";
+import DislikeButton from "./DislikeButton";
 
 const TweetCard = ({ tweet }) => {
     return(
@@ -11,7 +12,7 @@ const TweetCard = ({ tweet }) => {
                 <p className="text-gray-700 mb-4 leading-relaxed">{tweet.body}</p>
                 <div className="flex items-center gap-4 mb-3">
                     <LikeButton initialLikes={tweet.reactions.likes} />
-                    <p className="text-gray-600">Dislikes: {tweet.reactions.dislikes}</p>
+                    <DislikeButton initialDislikes={tweet.reactions.dislikes} />
                 </div>
                 <p className="text-sm text-blue-400">Tags: #{tweet.tags.join(', #')}</p>
                </div>
