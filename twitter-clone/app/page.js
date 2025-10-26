@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
   const [tweets, setTweets] = useState([]);
 
   const fetchTweets = async () => {
-    fetch('https://dummyjson.com/posts')
+    fetch('/api/tweets')
       .then((res) => res.json())
       .then((data) => setTweets(data));
   };
