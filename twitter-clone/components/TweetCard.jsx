@@ -4,15 +4,16 @@ const TweetCard = ({ tweet }) => {
         <>
         <div
                key={tweet.id}
-               className="border border-gray-300 rounded-lg p-4 w-[400px]"
+               className="p-6 w-[820px] mb-4 border-b border-zinc-800"
               >
-                <h2 className="font-bold text-lg mb-2">{tweet.title}</h2>
-                <p className="text-gray-700">{tweet.body}</p>
-                <p className="text-gray-700">
-                    Likes: {tweet.reactions.likes}    Dislikes: {tweet.reactions.dislikes}
-                </p>
-                <p>Tags: #{tweet.tags.join(', #')}</p>
-              </div>
+                <h2 className="font-bold text-xl mb-3 text-gray-200">{tweet.title}</h2>
+                <p className="text-gray-700 mb-4 leading-relaxed">{tweet.body}</p>
+                <div className="flex items-center gap-4 mb-3">
+                    <p className="text-gray-600">Likes: {tweet.reactions.likes}</p>
+                    <p className="text-gray-600">Dislikes: {tweet.reactions.dislikes}</p>
+                </div>
+                <p className="text-sm text-gray-500">Tags: #{tweet.tags.join(', #')}</p>
+               </div>
         </>
     );
 }
