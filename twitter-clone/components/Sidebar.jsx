@@ -4,10 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
 	HiOutlineHome,
+	HiHome,
 	HiOutlineSearch,
+	HiSearch,
 	HiOutlineBookmark,
+	HiBookmark,
 	HiOutlineUser,
+	HiUser,
 } from "react-icons/hi";
+
 import Image from "next/image";
 import logo from "/public/images/x-logo.png";
 import { FiUser } from "react-icons/fi";
@@ -17,10 +22,25 @@ import CreateTweetModal from "@/components/CreateTweetModal";
 <Image src={logo} alt="Logo" width={40} height={40} />;
 
 const navLinks = [
-	{ name: "Home", href: "/", icon: HiOutlineHome },
-	{ name: "Explore", href: "/explore", icon: HiOutlineSearch },
-	{ name: "Bookmarks", href: "/bookmarks", icon: HiOutlineBookmark },
-	{ name: "Profile", href: "/profile", icon: HiOutlineUser },
+	{ name: "Home", href: "/", icon: HiOutlineHome, filledIcon: HiHome },
+	{
+		name: "Explore",
+		href: "/explore",
+		icon: HiOutlineSearch,
+		filledIcon: HiSearch,
+	},
+	{
+		name: "Bookmarks",
+		href: "/bookmarks",
+		icon: HiOutlineBookmark,
+		filledIcon: HiBookmark,
+	},
+	{
+		name: "Profile",
+		href: "/profile",
+		icon: HiOutlineUser,
+		filledIcon: HiUser,
+	},
 ];
 
 export default function Sidebar() {
@@ -39,15 +59,20 @@ export default function Sidebar() {
 						href={link.href}
 						className={`
               flex items-center gap-4
-              px-4 py-2 rounded w-full text-left
+              px-4 py-2 rounded w-fit text-left
               ${
 								pathname === link.href
-									? "bg-[#0a0a0a] text-white"
-									: "text-gray-300 hover:bg-gray-900"
+									? "bg-[#0a0a0a] text-white text-lg font-bold"
+									: "text-gray-300 hover:bg-zinc-800 rounded-3xl text-lg"
 							}
               `}
 					>
-						<link.icon size={24} />
+						{pathname === link.href ? (
+							<link.filledIcon size={24} className="text-white" />
+						) : (
+							<link.icon size={24} className="text-gray-300" />
+						)}
+
 						<span>{link.name}</span>
 					</Link>
 				))}
