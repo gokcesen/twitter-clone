@@ -1,11 +1,11 @@
 'use client';
 
 import TweetCard from "@/components/TweetCard";
-import Header from "@/components/Header";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import TopTweetsPanel from "@/components/TopTweetsPanel";
+import Sidebar from "@/components/Sidebar";
 
 
   const Home =  () => {
@@ -32,7 +32,7 @@ import TopTweetsPanel from "@/components/TopTweetsPanel";
 
     return ( 
       <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-        <Header />
+        <Sidebar />
         <main className="flex flex-row row-start-2 items-start justify-center">
           <div className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start ml-60">
           {tweets &&
