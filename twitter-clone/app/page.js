@@ -45,7 +45,6 @@ import Sidebar from "@/components/Sidebar";
               ))
           }   
           </div> 
-          <TopTweetsPanel className="w-[600px] border-l border-zinc-800 p-6 ml-10" tweets={tweets}/>
         </main>
         <Footer />
       </div>
