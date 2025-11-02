@@ -3,7 +3,7 @@ export async function GET() {
       const res = await fetch('https://dummyjson.com/users');
       if (!res.ok) throw new Error('Failed to fetch external users');
       const data = await res.json();
-      return Response.json({ posts: data.posts }); 
+      return Response.json({ posts: data.users }); 
     } catch (error) {
       console.error(error);
       return Response.json({ error: 'Failed to fetch users' }, { status: 500 });

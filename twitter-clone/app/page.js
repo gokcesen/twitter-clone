@@ -4,7 +4,6 @@ import TweetCard from "@/components/TweetCard";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import TopTweetsPanel from "@/components/TopTweetsPanel";
 import Sidebar from "@/components/Sidebar";
 
 
