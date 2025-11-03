@@ -15,7 +15,6 @@ const TweetCard = ({ tweet }) => {
                 </div>
                 <div>
                 <TweetActions tweet={tweet} />
-                <p className="text-sm text-blue-400">Tags: #{tweet.tags.join(', #')}</p>
                 </div>
                </div>
         </>
