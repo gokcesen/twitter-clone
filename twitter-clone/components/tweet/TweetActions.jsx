@@ -1,8 +1,8 @@
-import LikeButton from "./buttons/LikeButton";
-import CommentButton from "./buttons/CommentButton";
-import RepostButton from "./buttons/RepostButton";
-import ShowStatsButton from "./buttons/ShowStatsButton";
-import BookmarksButton from "./buttons/BookmarksButton";
+import LikeButton from "../buttons/LikeButton";
+import CommentButton from "../buttons/CommentButton";
+import RepostButton from "../buttons/RepostButton";
+import ShowStatsButton from "../buttons/ShowStatsButton";
+import BookmarksButton from "../buttons/BookmarksButton";
 import { BsShare } from "react-icons/bs";
 
   const TweetActions = ({ tweet }) => {        

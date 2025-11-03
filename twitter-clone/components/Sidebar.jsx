@@ -17,7 +17,7 @@ import Image from "next/image";
 import logo from "/public/images/x-logo.png";
 import { FiUser } from "react-icons/fi";
 import { useState } from "react";
-import CreateTweetModal from "@/components/CreateTweetModal";
+import CreateTweetModal from "@/components/tweet/CreateTweetModal";
 
 <Image src={logo} alt="Logo" width={40} height={40} />;
 

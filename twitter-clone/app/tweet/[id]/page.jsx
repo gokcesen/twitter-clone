@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import TweetCard from "@/components/TweetCard";
+import TweetCard from "@/components/tweet/TweetCard";
 import { FaArrowLeft } from "react-icons/fa";
 import { useParams } from "next/navigation";
 
