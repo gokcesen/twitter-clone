@@ -2,16 +2,21 @@ import TweetActions from "./TweetActions";
 
 
 const TweetCard = ({ tweet }) => {
+   
     return(
         <>
         <div
                key={tweet.id}
                className="p-6 w-[700px] mb-4"
               >
-                <h2 className="font-bold text-xl mb-3 text-gray-200">{tweet.title}</h2>
-                <p className="text-gray-700 mb-4 leading-relaxed">{tweet.body}</p>
+                <div>
+                    <h2 className="font-bold text-xl mb-3 text-gray-200">{tweet.title}</h2>
+                    <p className="text-gray-700 mb-4 leading-relaxed">{tweet.body}</p>
+                </div>
+                <div>
                 <TweetActions tweet={tweet} />
                 <p className="text-sm text-blue-400">Tags: #{tweet.tags.join(', #')}</p>
+                </div>
                </div>
         </>
     );

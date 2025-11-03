@@ -9,10 +9,10 @@ const CommentButton = ({ initialComments }) => {
             <>
                 <button
                     href="#"
-                    className="flex items-center gap-2 text-white text-xl"
+                    className="flex items-center gap-2 text-gray-400 text-xl"
                 >
-                    <FiMessageCircle />
-                    <span className="text-white text-sm">{comments}</span>
+                    <FiMessageCircle size={16}/>
+                    <span className="text-gray-400 text-sm">{comments}</span>
                 </button>
             </>
         );

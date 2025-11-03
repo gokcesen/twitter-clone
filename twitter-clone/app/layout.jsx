@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Sidebar />
-        <main>
+        <main className="pt-14">
           {children}
         </main>
         <TopTweetsPanel className="w-[600px] border-l border-zinc-800 p-6 ml-10" tweets={tweets}/>

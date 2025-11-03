@@ -1,19 +1,22 @@
-import {
-    FiMessageCircle,
-    FiRepeat,
-    FiBarChart2,
-    FiBookmark,
-    FiShare
-  } from "react-icons/fi";
 import LikeButton from "./buttons/LikeButton";
 import CommentButton from "./buttons/CommentButton";
+import RepostButton from "./buttons/RepostButton";
+import ShowStatsButton from "./buttons/ShowStatsButton";
+import BookmarksButton from "./buttons/BookmarksButton";
+import { BsShare } from "react-icons/bs";
 
-  const TweetActions = ({ tweet }) => {
+  const TweetActions = ({ tweet }) => {        
     return(
         <>
-         <div className="flex items-center gap-4 mb-3">
+         <div className="flex items-center gap-20 mb-3 ml-12 text-gray-400">
             <CommentButton initialComments={tweet.totalComments} />
+            <RepostButton />
             <LikeButton initialLikes={tweet.reactions.likes} />
+            <ShowStatsButton initialStats={tweet.views} />
+            <div className="flex gap-4 ml-12">
+            <BookmarksButton />
+            <BsShare size={16}/>
+            </div>
         </div>
         </>
     );

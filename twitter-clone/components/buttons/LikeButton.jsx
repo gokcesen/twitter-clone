@@ -18,10 +18,10 @@ const LikeButton = ({ initialLikes }) => {
 			<button
 				href="#"
 				onClick={toggleLike}
-				className="flex items-center gap-2 text-white text-xl"
+				className="flex items-center gap-2 text-gray-400 text-xl"
 			>
-				{liked ? <FaHeart /> : <FaRegHeart />}
-				<span className="text-white text-sm">{likes}</span>
+				{liked ? <FaHeart size={16} /> : <FaRegHeart size={16} />}
+				<span className="text-gray-400 text-sm">{likes}</span>
 			</button>
 		</>
 	);
