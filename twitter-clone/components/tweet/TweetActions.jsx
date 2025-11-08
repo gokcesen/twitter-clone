@@ -10,7 +10,7 @@ import { BsShare } from "react-icons/bs";
         <>
          <div className="flex items-center gap-20 mb-3 ml-12 text-gray-400">
             <CommentButton initialComments={tweet.totalComments} />
-            <RepostButton />
+            <RepostButton tweet={tweet}/>
             <LikeButton initialLikes={tweet.reactions.likes} />
             <ShowStatsButton initialStats={tweet.views} />
             <div className="flex gap-4 ml-12">
