@@ -29,7 +29,6 @@ export default function BookmarksPage() {
           bookmarks.map((tweet) => (
             <div key={tweet.id} className="relative">
               <TweetCard tweet={tweet} />
-
             </div>
           ))
         )}

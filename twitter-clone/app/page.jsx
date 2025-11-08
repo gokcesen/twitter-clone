@@ -9,26 +9,38 @@ import Header from "@/components/Header";
 import CreateTweetBox from "@/components/tweet/CreateTweetBox";
 
 const Home = () => {
-	const [tweets, setTweets] = useState([]);
-	const [users, setUsers] = useState([]);
+  const [tweets, setTweets] = useState([]);
+  const [userMap, setUserMap] = useState({});
 
-	const fetchTweets = async () => {
-		fetch("/api/tweets")
-			.then((res) => res.json())
-			.then((data) => setTweets(data));
-	};
-	useEffect(() => {
-		fetchTweets();
-	}, []);
+  useEffect(() => {
+    const fetchAll = async () => {
+      try {
+        const res = await fetch("/api/tweets");
+        const data = await res.json();
+        const posts = data.posts || [];
+        const userIds = data.userIds || [];
 
-	const fetchUsers = async () => {
-		fetch("/api/users")
-			.then((res) => res.json())
-			.then((data) => setUsers(data));
-	};
-	useEffect(() => {
-		fetchUsers();
-	}, []);
+        let users = [];
+        if (userIds.length > 0) {
+          const usersRes = await fetch(`/api/users?ids=${userIds.join(",")}`);
+          const usersData = await usersRes.json();
+          users = usersData.users || [];
+        }
+
+        const map = {};
+        users.forEach((u) => {
+          map[u.id] = u;
+        });
+
+        setUserMap(map);
+        setTweets(posts);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchAll();
+  }, []);
 
 	return (
 		<div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
@@ -39,14 +51,15 @@ const Home = () => {
 						<Header />
 					</div>
           <CreateTweetBox />
-					{tweets &&
-						tweets.posts &&
-						tweets.posts.map((tweet) => (
-							<Link key={tweet.id} href={`/tweet/${tweet.id}`}>
-								<TweetCard key={tweet.id} tweet={tweet} />
-								<div className="border-b border-zinc-800 w-[1060px]"></div>
-							</Link>
-						))}
+          {tweets.map((tweet) => {
+            const user = userMap[tweet.userId];
+            return (
+              <Link key={tweet.id} href={`/tweet/${tweet.id}`}>
+                <TweetCard tweet={{ ...tweet, user }} />
+                <div className="border-b border-zinc-800 w-[1060px]"></div>
+              </Link>
+            );
+          })}
 				</div>
 			</main>
 			<Footer />
