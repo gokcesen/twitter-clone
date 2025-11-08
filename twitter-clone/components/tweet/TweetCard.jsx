@@ -16,10 +16,8 @@ const TweetCard = ({ tweet }) => {
 					</div>
 				</div>
 
-				{/* Tweet body */}
 				<p className="text-white mb-3 leading-relaxed">{tweet.body}</p>
 
-				{/* Tweet actions */}
 				<TweetActions tweet={tweet} />
 			</div>
 		</>

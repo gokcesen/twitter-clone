@@ -5,7 +5,7 @@ import ShowStatsButton from "../buttons/ShowStatsButton";
 import BookmarksButton from "../buttons/BookmarksButton";
 import { BsShare } from "react-icons/bs";
 
-  const TweetActions = ({ tweet }) => {        
+  const TweetActions = ({ tweet }) => {       
     return(
         <>
          <div className="flex items-center gap-20 mb-3 ml-12 text-gray-400">
@@ -14,7 +14,7 @@ import { BsShare } from "react-icons/bs";
             <LikeButton initialLikes={tweet.reactions.likes} />
             <ShowStatsButton initialStats={tweet.views} />
             <div className="flex gap-4 ml-12">
-            <BookmarksButton />
+            <BookmarksButton tweet={tweet}/>
             <BsShare size={16}/>
             </div>
         </div>

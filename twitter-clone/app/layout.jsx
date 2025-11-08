@@ -4,6 +4,7 @@ import "./globals.css";
 import TopTweetsPanel from "@/components/TopTweetsPanel";
 import Sidebar from "@/components/Sidebar";
 import { useState, useEffect } from "react";
+import Providers from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +36,7 @@ export default function RootLayout({ children }) {
       >
         <Sidebar />
         <main className="pt-14">
-          {children}
+          <Providers>{children}</Providers>
         </main>
         <TopTweetsPanel className="w-[600px] border-l border-zinc-800 p-6 ml-10" tweets={tweets}/>
       </body>
