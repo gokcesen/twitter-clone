@@ -7,7 +7,7 @@ export default function CreateTweetBox() {
   const [text, setText] = useState("");
 
   return (
-    <div className="flex w-[800px] top-0 border-b border-neutral-800 px-4 pt-0 pb-4 -mt-40 text-white">
+    <div className="flex w-[1060px] top-0 border-b border-neutral-800 px-4 pt-0 pb-4 -mt-36 text-white">
       <div className="mr-4">
         <div className="w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center">
                                 <FiUser size={32} className="text-white" />

@@ -1,5 +1,5 @@
 export async function GET(req, { params }) {
-  const { id } = params;
+  const { id } = await params; 
 
   try {
     const postRes = await fetch(`https://dummyjson.com/posts/${id}`, { cache: "no-store" });

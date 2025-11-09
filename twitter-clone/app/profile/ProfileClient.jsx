@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import { useReposts } from "@/contexts/RepostContext";
-import TweetCard from "@/components/tweet/TweetCard";
+
 
 const ProfileClient = () => {
     const { reposts } = useReposts();
@@ -13,6 +13,9 @@ const ProfileClient = () => {
 	const myPosts = [];
 	const myAnswers = [];
 	const myLiked = [];
+
+
+    
 
 	const tabs = [
 		{ id: "posts", label: "Posts", data: reposts },
@@ -23,6 +26,8 @@ const ProfileClient = () => {
 	];
 
 	const activeTabData = tabs.find((t) => t.id === activeTab);
+
+   
   return (
     <main className="flex justify-center pt-4">
     <div className="w-full max-w-[800px] bg-[#0a0a0a] text-white overflow-hidden mr-6">

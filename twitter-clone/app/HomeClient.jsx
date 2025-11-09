@@ -42,7 +42,7 @@ const HomeClient = () => {
     }, []);
     
 	return (
-		<div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+		<div className="font-sans grid grid-rows-[20px_1fr_20px] justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
 			<Sidebar />
 			<main className="flex flex-row row-start-2 items-start justify-center">
 				<div className="flex flex-col gap-y-0 row-start-2 items-center sm:items-start ml-60">

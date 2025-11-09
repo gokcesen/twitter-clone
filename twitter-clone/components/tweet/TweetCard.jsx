@@ -4,7 +4,7 @@ const TweetCard = ({ tweet }) => {
   const user = tweet.user;
 
   return (
-    <div className="p-6 w-[700px] mb-2">
+    <div className="p-6 w-[800px] mb-2">
       <div className="flex items-center space-x-3 mb-3">
         <div className="w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center overflow-hidden">
           {user?.image ? (

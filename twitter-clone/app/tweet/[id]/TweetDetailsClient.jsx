@@ -21,7 +21,7 @@ const TweetDetailsClient = ({ params }) => {
   }, [id]);
 
   if (!tweet) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
 
   return (
