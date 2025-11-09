@@ -88,9 +88,15 @@ export default function Sidebar() {
 				/>
 
 				<div className="flex items-center space-x-3 p-2 hover:bg-gray-900 rounded cursor-pointer mt-auto">
-					<div className="w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center">
-						<FiUser size={24} className="text-white" />
-					</div>
+				<div className="w-10 h-10 rounded-full overflow-hidden bg-gray-700 flex-shrink-0">
+  <img
+    src="/images/avatar.jpg"
+    alt="User avatar"
+    className="w-full h-full object-cover"
+  />
+</div>
+
+
 					<div className="flex flex-col">
 						<span className="font-semibold">John Doe</span>
 						<span className="text-sm text-gray-400">@johndoe</span>
