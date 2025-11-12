@@ -9,63 +9,64 @@ import LoadingScreen from "@/components/LoadingScreen";
 import { usePathname } from "next/navigation";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+	variable: "--font-geist-sans",
+	subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+	variable: "--font-geist-mono",
+	subsets: ["latin"],
 });
 
 export default function RootLayout({ children }) {
-  const [tweets, setTweets] = useState([]);
-  const [dataLoading, setDataLoading] = useState(true);
-  const [routeLoading, setRouteLoading] = useState(false);
-  const pathname = usePathname();
+	const [tweets, setTweets] = useState([]);
+	const [dataLoading, setDataLoading] = useState(true);
+	const [routeLoading, setRouteLoading] = useState(false);
+	const pathname = usePathname();
 
-  useEffect(() => {
-    fetch("/api/tweets")
-      .then((res) => res.json())
-      .then((data) => setTweets(data))
-      .catch((e) => console.error(e))
-      .finally(() => {
-        setDataLoading(false);
-      });
-  }, []);
+	useEffect(() => {
+		fetch("/api/tweets")
+			.then((res) => res.json())
+			.then((data) => setTweets(data))
+			.catch((e) => console.error(e))
+			.finally(() => {
+				setDataLoading(false);
+			});
+	}, []);
 
-  useEffect(() => {
-    if (!dataLoading) {
-      setRouteLoading(true);
+	useEffect(() => {
+		if (!dataLoading) {
+			setRouteLoading(true);
 
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          setRouteLoading(false);
-        }, 60);
-      });
-    }
-  }, [pathname, dataLoading]);
+			requestAnimationFrame(() => {
+				setTimeout(() => {
+					setRouteLoading(false);
+				}, 300);
+			});
+		}
+	}, [pathname, dataLoading]);
 
-  const loading = dataLoading || routeLoading;
+	const loading = dataLoading || routeLoading;
 
-  return (
-    <html lang="en">
-     <body
-  className={`${geistSans.variable} ${geistMono.variable} antialiased ${loading ? "overflow-hidden" : ""}`}
->
+	return (
+		<html lang="en">
+			<body
+				className={`${geistSans.variable} ${geistMono.variable} antialiased ${
+					loading ? "overflow-hidden" : ""
+				}`}
+			>
+				<Sidebar />
 
-        <Sidebar />
-        <main className="pt-14">
-          <Providers>{children}</Providers>
-        </main>
-        <TopTweetsPanel
-          className="w-[600px] border-l border-zinc-800 p-6 ml-10"
-          tweets={tweets}
-        />
+				<main className="pt-14">
+					<Providers>{children}</Providers>
+				</main>
+				<TopTweetsPanel
+					className="w-[600px] border-l border-zinc-800 p-6 ml-10"
+					tweets={tweets}
+				/>
 
-        {loading && <LoadingScreen />}
-      </body>
-    </html>
-  );
+				{loading && <LoadingScreen />}
+			</body>
+		</html>
+	);
 }
-

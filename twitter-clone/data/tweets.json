@@ -1,0 +1,20 @@
+[
+  {
+    "id": 31,
+    "body": "First tweet!!",
+    "user": {
+      "id": 999,
+      "firstName": "John",
+      "lastName": "Doe",
+      "username": "johndoe",
+      "image": "/images/avatar.jpg"
+    },
+    "reactions": {
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0
+    },
+    "views": 0,
+    "createdAt": "2025-11-12T10:52:32.116Z"
+  }
+]

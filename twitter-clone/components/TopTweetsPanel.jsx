@@ -30,7 +30,7 @@ export default function TopTweetsPanel({ tweets }) {
 		.slice(0, 5);
 
 	return (
-		<aside className="fixed top-0 right-36 h-screen w-[320px] bg-[#0a0a0a] border-l border-zinc-800 text-white flex flex-col items-start p-6 space-y-4 shadow-lg">
+		<aside className="fixed top-0 right-36 h-screen w-[320px] bg-[#0a0a0a] border-l border-zinc-800 text-white flex flex-col items-start p-6 space-y-4 shadow-lg hidden lg:block">
 			<div className="border rounded-lg border-zinc-800 w-[340px] p-4">
 				<h2 className="text-lg font-semibold mb-4">Today's News</h2>
 

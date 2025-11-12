@@ -48,7 +48,7 @@ export default function Sidebar() {
 	const [showModal, setShowModal] = useState(false);
 
 	return (
-		<div className="mb-5">
+		<div className="hidden lg:block mb-5">
 			<aside className="fixed top-0 left-36 h-screen w-[300px] bg-[#0a0a0a] border-r border-zinc-800 text-white flex flex-col items-start p-6 space-y-4 shadow-lg">
 				<div className="px-2">
 					<Image src={logo} alt="Icon" width={36} height={36} />

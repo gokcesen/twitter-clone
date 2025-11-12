@@ -1,24 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import { useReposts } from "@/contexts/RepostContext";
+import TweetCard from "@/components/tweet/TweetCard";
 
 
 const ProfileClient = () => {
     const { reposts } = useReposts();
 	const [activeTab, setActiveTab] = useState("posts");
+    const [localTweets, setLocalTweets] = useState([]);
 
-	const myPosts = [];
-	const myAnswers = [];
+    useEffect(() => {
+        fetch("/api/posts")
+          .then((res) => res.json())
+          .then((data) => setLocalTweets(data))
+          .catch(console.error);
+      }, []);
+
+    const myPosts = [...localTweets, ...reposts]
+    const myAnswers = [];
 	const myLiked = [];
 
 
-    
-
 	const tabs = [
-		{ id: "posts", label: "Posts", data: reposts },
+        { id: "posts", label: "Posts", data: myPosts },
 		{ id: "answers", label: "Replies", data: myAnswers },
 		{ id: "highlights", label: "Highlights", data: myLiked },
 		{ id: "media", label: "Media", data: myLiked },
@@ -98,9 +105,9 @@ const ProfileClient = () => {
                     No {activeTabData.label.toLowerCase()} yet.
                 </p>
             ) : (
-                activeTabData.data.map((tweet) => (
-                    <TweetCard key={tweet.id} tweet={tweet} />
-                ))
+                activeTabData.data.map((tweet, index) => (
+                    <TweetCard key={tweet.id || tweet.body || index} tweet={tweet} />
+                  ))
             )}
         </div>
     </div>
