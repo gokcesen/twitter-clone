@@ -11,7 +11,7 @@ export default function CreateTweetBox() {
 		if (!text.trim()) return;
 		setIsPosting(true);
 		try {
-			const res = await fetch("/api/posts", {
+			const res = await fetch("/api/tweets", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ text }),
@@ -35,7 +35,7 @@ export default function CreateTweetBox() {
 	};
 
 	return (
-		<div className="flex w-[1060px] top-0 border-b border-neutral-800 px-4 pt-0 pb-4 -mt-36 text-white">
+		<div className="flex w-[800px] top-0 border-b border-neutral-800 px-4 pt-0 pb-4 -mt-36 text-white">
 			<div className="mr-4">
 				<div className="w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center">
 					<FiUser size={32} className="text-white" />
@@ -59,11 +59,11 @@ export default function CreateTweetBox() {
 					<button
 						onClick={handlePost}
 						disabled={!text.trim() || isPosting}
-						className={`px-4 py-1 rounded-3xl font-bold ${
-							text.trim() && !isPosting
-								? "bg-sky-500 text-white hover:bg-sky-600"
-								: "bg-gray-700 text-white/60"
-						}`}
+						 className={`px-4 py-1 rounded-3xl font-bold min-w-[72px] z-10 ${
+							   text.trim() && !isPosting
+							     ? "bg-sky-500 text-white hover:bg-sky-600"
+							     : "bg-gray-800 text-gray-200 border border-gray-600 opacity-100"
+							 }`}
 					>
 						{isPosting ? "Posting..." : "Post"}
 					</button>

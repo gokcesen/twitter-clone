@@ -10,7 +10,7 @@ export default function CreateTweetModal({ show, onClose }) {
 		if (!tweetText.trim()) return;
 		setIsPosting(true);
 		try {
-		  await fetch("/api/posts", {
+		  await fetch("/api/tweets", {
 			method: "POST",
 			headers: {
 			  "Content-Type": "application/json",

@@ -30,6 +30,7 @@ const TweetCard = ({ tweet }) => {
       <p className="text-white mb-3 leading-relaxed">{tweet.body}</p>
 
       <TweetActions tweet={tweet} />
+
     </div>
   );
 };

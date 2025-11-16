@@ -13,7 +13,7 @@ const ProfileClient = () => {
     const [localTweets, setLocalTweets] = useState([]);
 
     useEffect(() => {
-        fetch("/api/posts")
+        fetch("/api/tweets")
           .then((res) => res.json())
           .then((data) => setLocalTweets(data))
           .catch(console.error);
@@ -106,9 +106,15 @@ const ProfileClient = () => {
                 </p>
             ) : (
                 activeTabData.data.map((tweet, index) => (
-                    <TweetCard key={tweet.id || tweet.body || index} tweet={tweet} />
+                    <div key={tweet.id || tweet.body || index}>
+                      <TweetCard tweet={tweet} />
+                      <div className="border-b border-zinc-800 w-[1080px] ml-[-24px]" />
+                    </div>
                   ))
+                  
+
             )}
+
         </div>
     </div>
 </main>
