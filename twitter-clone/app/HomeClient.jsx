@@ -28,7 +28,8 @@ const HomeClient = () => {
 
 				const map = {};
 				users.forEach((u) => {
-					map[u.id] = u;
+					// 🔥 CRITICAL FIX HERE
+					map[u.externalId] = u;
 				});
 
 				setUserMap(map);
@@ -44,11 +45,11 @@ const HomeClient = () => {
 	return (
 		<div className="font-sans grid grid-rows-[20px_1fr_20px] min-h-screen p-2 pb-20 gap-16 sm:p-20">
 			<Sidebar />
-  <main className="flex flex-col items-start mx-auto">
-  <div className="flex flex-col gap-y-0 row-start-2 items-center sm:items-start ml-60">
-						<Header />
-           
+			<main className="flex flex-col items-start mx-auto">
+				<div className="flex flex-col gap-y-0 row-start-2 items-center sm:items-start ml-60">
+					<Header />
 					<CreateTweetBox />
+
 					{tweets.map((tweet) => {
 						const user = userMap[tweet.userId];
 						return (
