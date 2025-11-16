@@ -35,9 +35,6 @@ const TweetSchema = new mongoose.Schema(
       default: () => new Date() 
     },
   },
-  { 
-    timestamps: true 
-  }
 );
 
 TweetSchema.pre("save", async function (next) {

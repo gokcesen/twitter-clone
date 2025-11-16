@@ -1,7 +1,11 @@
 import TweetActions from "./TweetActions";
+import { timeAgo } from "@/lib/utils/time"; // ⭐ timeAgo importu
 
 const TweetCard = ({ tweet }) => {
   const user = tweet.user;
+
+  // ⭐ timeAgo hesaplama
+  const timeText = timeAgo(tweet.createdAt);
 
   return (
     <div className="p-6 w-[800px] mb-2">
@@ -17,10 +21,22 @@ const TweetCard = ({ tweet }) => {
             <div className="w-full h-full bg-gray-500" />
           )}
         </div>
+
         <div className="flex flex-col">
-          <span className="font-semibold text-white">
-            {user ? `${user.firstName} ${user.lastName}` : "Unknown"}
-          </span>
+          <div className="flex items-center text-white">
+            <span className="font-semibold">
+              {user ? `${user.firstName} ${user.lastName}` : "Unknown"}
+            </span>
+
+            {/* ⭐ Ortalanmış dot */}
+            <span className="mx-2 text-gray-400">·</span>
+
+            {/* ⭐ Time ago */}
+            <span className="text-gray-400 text-sm">
+              {timeText}
+            </span>
+          </div>
+
           <span className="text-sm text-gray-400">
             {user ? `@${user.username}` : "@unknown"}
           </span>
@@ -30,10 +46,8 @@ const TweetCard = ({ tweet }) => {
       <p className="text-white mb-3 leading-relaxed">{tweet.body}</p>
 
       <TweetActions tweet={tweet} />
-
     </div>
   );
 };
 
 export default TweetCard;
-
