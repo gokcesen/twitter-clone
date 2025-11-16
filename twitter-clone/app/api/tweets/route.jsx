@@ -1,7 +1,6 @@
 import connectDB from "@/lib/config/database";
 import TweetModel from "@/lib/models/TweetModel";
 
-// ✅ Tweetleri getir
 export async function GET() {
   try {
     await connectDB();

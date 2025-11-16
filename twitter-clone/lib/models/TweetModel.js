@@ -2,15 +2,38 @@ import mongoose from "mongoose";
 
 const TweetSchema = new mongoose.Schema(
   {
-    id: { type: Number, required: false }, 
-    userId: { type: Number, required: false, default: 1 }, 
-    body: { type: String, required: false, default: "" },
-    tags: { type: [String], default: [] },
-    likes: { type: Number, default: 0 },
-    views: { type: Number, default: 0 },
-    createdAt: { type: Date, default: () => new Date() },
+    id: { 
+      type: Number, 
+      required: false 
+    }, 
+    userId: { 
+      type: Number, 
+      required: false, 
+      default: 1 
+    }, 
+    body: { 
+      type: String, 
+      required: false, 
+      default: "" ,
+      minlength: 3,
+      maxlength: 280
+    },
+    likes: { 
+      type: Number, 
+      default: 0 
+    },
+    views: { 
+      type: Number, 
+      default: 0 
+    },
+    createdAt: { 
+      type: Date, 
+      default: () => new Date() 
+    },
   },
-  { timestamps: true }
+  { 
+    timestamps: true 
+  }
 );
 
 TweetSchema.pre("save", async function (next) {
