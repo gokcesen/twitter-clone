@@ -4,6 +4,8 @@ import RepostButton from "../buttons/RepostButton";
 import ShowStatsButton from "../buttons/ShowStatsButton";
 import BookmarksButton from "../buttons/BookmarksButton";
 import { BsShare } from "react-icons/bs";
+import { LuShare } from "react-icons/lu";
+
 
   const TweetActions = ({ tweet }) => {       
     return(
@@ -15,7 +17,7 @@ import { BsShare } from "react-icons/bs";
             <ShowStatsButton initialStats={tweet.views} />
             <div className="flex gap-4 ml-12">
             <BookmarksButton tweet={tweet}/>
-            <BsShare size={16}/>
+            <LuShare size={16}/>
             </div>
         </div>
         </>

@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { FiImage, FiSmile, FiUser } from "react-icons/fi";
+import { FiImage, FiSmile, FiMapPin } from "react-icons/fi";
+import { TbGif } from "react-icons/tb";
+
+
 
 export default function CreateTweetBox() {
 	const [text, setText] = useState("");
@@ -36,9 +39,13 @@ export default function CreateTweetBox() {
 
 	return (
 		<div className="flex w-[800px] top-0 border-b border-neutral-800 px-4 pt-0 pb-4 -mt-36 text-white">
-			<div className="mr-4">
-				<div className="w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center">
-					<FiUser size={32} className="text-white" />
+			<div className="mr-4 -mt-4 ml-2">
+				<div className="w-14 h-14 rounded-full overflow-hidden bg-gray-700 flex-shrink-0">
+					<img
+						src="/images/avatar.jpg"
+						alt="User avatar"
+						className="w-full h-full object-cover"
+					/>
 				</div>
 			</div>
 
@@ -47,23 +54,26 @@ export default function CreateTweetBox() {
 					value={text}
 					onChange={(e) => setText(e.target.value)}
 					placeholder="What’s happening?"
-					className="w-full bg-transparent text-gray-200 text-lg resize-none focus:outline-none placeholder-gray-500"
+					className="w-full bg-transparent text-gray-200 text-xl resize-none focus:outline-none placeholder-gray-500"
 					rows={3}
 				/>
 
 				<div className="flex items-center justify-between mt-2">
 					<div className="flex gap-4 text-sky-500">
 						<FiImage size={20} />
+						<TbGif size={20} className="border" />
+						
 						<FiSmile size={20} />
+						<FiMapPin size={20} />
 					</div>
 					<button
 						onClick={handlePost}
 						disabled={!text.trim() || isPosting}
-						 className={`px-4 py-1 rounded-3xl font-bold min-w-[72px] z-10 ${
-							   text.trim() && !isPosting
-							     ? "bg-sky-500 text-white hover:bg-sky-600"
-							     : "bg-gray-800 text-gray-200 border border-gray-600 opacity-100"
-							 }`}
+						className={`px-4 py-1 rounded-3xl font-bold min-w-[72px] z-10 ${
+							text.trim() && !isPosting
+								? "bg-sky-500 text-white hover:bg-sky-600"
+								: "bg-gray-800 text-gray-200 border border-gray-600 opacity-100"
+						}`}
 					>
 						{isPosting ? "Posting..." : "Post"}
 					</button>

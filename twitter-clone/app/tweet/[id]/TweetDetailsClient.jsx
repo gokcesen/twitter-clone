@@ -25,7 +25,7 @@ const TweetDetailsClient = ({ params }) => {
   }
 
   return (
-    <main className="flex flex-col items-start ml-[500px] mt-8 gap-4">
+    <main className="flex flex-col items-start ml-[450px] -mt-2 gap-4">
       <div className="flex flex-row items-center">
         <Link
           href="/"
