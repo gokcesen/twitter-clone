@@ -9,8 +9,8 @@ export default function BookmarksPage() {
   const { bookmarks, toggleBookmark } = useBookmarks();
 
   return (
-    <main className="flex justify-center mt-8">
-      <div className="w-full max-w-2xl flex flex-col gap-6">
+    <main className="flex justify-center mt-8 -ml-16">
+      <div className="w-full max-w-2xl flex flex-col gap-6 -mt-12">
         <div className="flex items-center gap-2">
           <Link
             href="/"
@@ -27,7 +27,7 @@ export default function BookmarksPage() {
           </p>
         ) : (
           bookmarks.map((tweet) => (
-            <div key={tweet.id} className="relative">
+            <div key={tweet.id} className="flex justify-start -mt-4 w-[740px]">
               <TweetCard tweet={tweet} />
             </div>
           ))
