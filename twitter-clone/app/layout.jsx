@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import Providers from "./providers";
 import LoadingScreen from "@/components/LoadingScreen";
 import { usePathname } from "next/navigation";
+import MessagePanel from "@/components/MessagePanel";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -58,7 +59,10 @@ export default function RootLayout({ children }) {
 				<Sidebar />
 
 				<main className="pt-14">
-					<Providers>{children}</Providers>
+					<Providers>
+						{children}
+						<MessagePanel />
+				</Providers>
 				</main>
 				<TopTweetsPanel
 					className="w-[600px] border-l border-zinc-800 p-6 ml-10"
