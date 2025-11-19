@@ -8,9 +8,17 @@ import { LuShare } from "react-icons/lu";
 
 
   const TweetActions = ({ tweet }) => {       
+    const stop = (e) => {
+      e.stopPropagation();
+      e.preventDefault(); 
+    };
+
     return(
         <>
-         <div className="flex items-center gap-20 mb-3 ml-12 text-gray-400">
+         <div 
+         className="flex items-center gap-20 mb-3 ml-12 text-gray-400"
+          onClick={stop}
+          >
             <CommentButton initialComments={tweet.totalComments} />
             <RepostButton tweet={tweet}/>
             <LikeButton initialLikes={tweet.likes} />

@@ -1,10 +1,9 @@
 import TweetActions from "./TweetActions";
-import { timeAgo } from "@/lib/utils/time"; // ⭐ timeAgo importu
+import { timeAgo } from "@/lib/utils/time"; 
 
 const TweetCard = ({ tweet }) => {
   const user = tweet.user;
 
-  // ⭐ timeAgo hesaplama
   const timeText = timeAgo(tweet.createdAt);
 
   return (
@@ -28,10 +27,10 @@ const TweetCard = ({ tweet }) => {
               {user ? `${user.firstName} ${user.lastName}` : "Unknown"}
             </span>
 
-            {/* ⭐ Ortalanmış dot */}
+         
             <span className="mx-2 text-gray-400">·</span>
 
-            {/* ⭐ Time ago */}
+        
             <span className="text-gray-400 text-sm">
               {timeText}
             </span>
