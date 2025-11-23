@@ -28,12 +28,12 @@ const HomeClient = () => {
 
 				const map = {};
 				users.forEach((u) => {
-					// 🔥 CRITICAL FIX HERE
 					map[u.externalId] = u;
 				});
 
 				setUserMap(map);
-				setTweets(posts);
+				setTweets(posts.reverse());
+
 			} catch (err) {
 				console.error(err);
 			}

@@ -17,14 +17,19 @@ const TweetCard = ({ tweet }) => {
               className="w-full h-full object-cover"
             />
           ) : (
-            <div className="w-full h-full bg-gray-500" />
+            <img
+  src="/images/avatar.jpg"
+  alt="avatar"
+  className="w-full h-full object-cover"
+/>
+
           )}
         </div>
 
         <div className="flex flex-col">
           <div className="flex items-center text-white">
             <span className="font-semibold">
-              {user ? `${user.firstName} ${user.lastName}` : "Unknown"}
+              {user ? `${user.firstName} ${user.lastName}` : "John Doe"}
             </span>
 
          
@@ -37,7 +42,7 @@ const TweetCard = ({ tweet }) => {
           </div>
 
           <span className="text-sm text-gray-400">
-            {user ? `@${user.username}` : "@unknown"}
+            {user ? `@${user.username}` : "@johndoe"}
           </span>
         </div>
       </div>

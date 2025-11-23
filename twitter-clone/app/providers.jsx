@@ -2,13 +2,16 @@
 
 import { BookmarkProvider } from "../contexts/BookmarkContext";
 import { RepostProvider } from "../contexts/RepostContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 export default function Providers({ children }) {
   return (
-    <BookmarkProvider>
-      <RepostProvider>
-        {children}
-      </RepostProvider>
-    </BookmarkProvider>
+    <AuthProvider>
+      <BookmarkProvider>
+        <RepostProvider>
+          {children}
+        </RepostProvider>
+      </BookmarkProvider>
+    </AuthProvider>
   );
 }
