@@ -20,8 +20,18 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
+  // Wrapper function to update both state and localStorage
+  const updateUser = (newUser) => {
+    setUser(newUser);
+    if (newUser) {
+      localStorage.setItem("user", JSON.stringify(newUser));
+    } else {
+      localStorage.removeItem("user");
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, setUser, loading }}>
+    <AuthContext.Provider value={{ user, setUser: updateUser, loading }}>
       {children}
     </AuthContext.Provider>
   );
