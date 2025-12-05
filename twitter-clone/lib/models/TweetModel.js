@@ -6,10 +6,9 @@ const TweetSchema = new mongoose.Schema(
       type: Number, 
       required: false 
     }, 
-    userId: { 
-      type: Number, 
-      required: false, 
-      default: 1 
+    userId: {
+      type: Number,
+      required: true,
     }, 
     body: { 
       type: String, 
