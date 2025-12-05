@@ -3,12 +3,19 @@
 import { useState } from "react";
 import { FiImage, FiSmile, FiMapPin } from "react-icons/fi";
 import { TbGif } from "react-icons/tb";
+import { useAuth } from "@/contexts/AuthContext";
+
 
 
 
 export default function CreateTweetBox() {
 	const [text, setText] = useState("");
 	const [isPosting, setIsPosting] = useState(false);
+	const { user } = useAuth();
+
+	const avatarSrc = user?.image || "/images/default-avatar.jpeg";
+
+
 
 	const handlePost = async () => {
 		if (!text.trim()) return;
@@ -38,11 +45,11 @@ export default function CreateTweetBox() {
 	};
 
 	return (
-		<div className="flex w-[800px] top-0 border-b border-neutral-800 px-4 pt-0 pb-4 -mt-36 text-white">
+		<div className="flex w-[800px] top-0 border-b border-neutral-800 px-4 pt-0 pb-4 -mt-32 text-white">
 			<div className="mr-4 -mt-4 ml-2">
 				<div className="w-14 h-14 rounded-full overflow-hidden bg-gray-700 flex-shrink-0">
 					<img
-						src="/images/avatar.jpg"
+						src={avatarSrc}
 						alt="User avatar"
 						className="w-full h-full object-cover"
 					/>
