@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
-import { useBookmarks } from "../../contexts/BookmarkContext";
+import { useBookmarks } from "@/contexts/BookmarkContext";
 import TweetCard from "@/components/tweet/TweetCard";
 
 export default function BookmarksPage() {
@@ -13,7 +13,7 @@ export default function BookmarksPage() {
       <div className="w-full max-w-2xl flex flex-col gap-6 -mt-12">
         <div className="flex items-center gap-2">
           <Link
-            href="/"
+            href="/home"
             className="flex items-center gap-2 bg-[#0a0a0a] text-white px-3 py-2 rounded-lg shadow hover:bg-gray-900 transition-colors"
           >
             <FaArrowLeft size={20} className="text-white drop-shadow-md" />

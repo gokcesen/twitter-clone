@@ -16,6 +16,7 @@ import {
 import Image from "next/image";
 import logo from "/public/images/x-logo.png";
 import { FiUser } from "react-icons/fi";
+import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
 import CreateTweetModal from "@/components/tweet/CreateTweetModal";
 
@@ -46,7 +47,9 @@ const navLinks = [
 export default function Sidebar() {
 	const pathname = usePathname();
 	const [showModal, setShowModal] = useState(false);
-
+	const { user, loading } = useAuth();
+	if (loading) return null;
+	console.log("Sidebar User:", user);
 	return (
 		<div className="hidden lg:block mb-5">
 			<aside className="fixed top-0 left-36 h-screen w-[300px] bg-[#0a0a0a] border-r border-zinc-800 text-white flex flex-col items-start p-6 space-y-4 shadow-lg">
@@ -94,14 +97,17 @@ export default function Sidebar() {
 					{" "}
 					<div className="w-10 h-10 rounded-full overflow-hidden bg-gray-700 flex-shrink-0">
 						<img
-							src="/images/avatar.jpg"
+							src={user?.image || "/images/default-avatar.jpeg"}
 							alt="User avatar"
 							className="w-full h-full object-cover"
 						/>
 					</div>
 					<div className="flex flex-col">
-						<span className="font-semibold">John Doe</span>
-						<span className="text-sm text-gray-400">@johndoe</span>
+						<span className="font-semibold">
+							{user?.firstName} {user?.lastName}
+						</span>
+
+						<span className="text-sm text-gray-400">@{user?.username}</span>
 					</div>
 				</Link>
 			</aside>

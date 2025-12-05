@@ -28,7 +28,7 @@ const TweetDetailsClient = ({ params }) => {
     <main className="flex flex-col items-start ml-[450px] -mt-2 gap-4">
       <div className="flex flex-row items-center">
         <Link
-          href="/"
+          href="/home"
           className="top-4 left-4 flex items-start gap-2 bg-[#0a0a0a] text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition-colors"
         >
           <FaArrowLeft size={20} className="text-white drop-shadow-md" />

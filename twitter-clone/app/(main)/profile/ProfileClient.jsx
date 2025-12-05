@@ -40,7 +40,7 @@ const ProfileClient = () => {
       <div className="w-full max-w-[800px] bg-[#0a0a0a] text-white overflow-hidden mr-6">
         <div className="flex items-center gap-2 px-6 mb-2 relative">
           <Link
-            href="/"
+            href="/home"
             className="fixed top-4 left-[460px] z-20 flex items-center gap-2 text-white hover:text-sky-400 transition-colors"
           >
             <FaArrowLeft size={24} className="drop-shadow-md" />

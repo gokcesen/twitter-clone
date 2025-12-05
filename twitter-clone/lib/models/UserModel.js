@@ -38,6 +38,7 @@ const UserSchema = new mongoose.Schema({
     },
 	image: {
 		type: String,
+		default: "/images/default-avatar.jpeg"
 	},
 	university: {
 		type: String,
