@@ -7,33 +7,44 @@ import { useReposts } from "@/contexts/RepostContext";
 import TweetCard from "@/components/tweet/TweetCard";
 
 const ProfileClient = () => {
-    const { reposts } = useReposts();
-	const [activeTab, setActiveTab] = useState("posts");
-    const [localTweets, setLocalTweets] = useState([]);
+  const { reposts } = useReposts();
+  const [activeTab, setActiveTab] = useState("posts");
+  const [localTweets, setLocalTweets] = useState([]);
+  const [me, setMe] = useState(null);
 
-    useEffect(() => {
-        fetch("/api/tweets")
-          .then((res) => res.json())
-          .then((data) => {
-            const onlyMine = (data.posts || []).filter(t => t.userId === 0);
-            setLocalTweets(onlyMine);
-          })
-          .catch(console.error);
-      }, []);
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then((res) => res.json())
+      .then((data) => setMe(data))
+      .catch(console.error);
+  }, []);
 
-    const myPosts = [...localTweets, ...reposts];
-    const myAnswers = [];
-	const myLiked = [];
+  useEffect(() => {
+    fetch("/api/tweets")
+      .then((res) => res.json())
+      .then((data) => {
+        if (!me) return;
+        const onlyMine = (data.posts || []).filter(
+          (t) => t.userId === me.externalId
+        );
+        setLocalTweets(onlyMine);
+      })
+      .catch(console.error);
+  }, [me]);
 
-	const tabs = [
-        { id: "posts", label: "Posts", data: myPosts },
-		{ id: "answers", label: "Replies", data: myAnswers },
-		{ id: "highlights", label: "Highlights", data: myLiked },
-		{ id: "media", label: "Media", data: myLiked },
-		{ id: "likes", label: "Likes", data: myLiked },
-	];
+  const myPosts = [...localTweets, ...reposts];
+  const myAnswers = [];
+  const myLiked = [];
 
-	const activeTabData = tabs.find((t) => t.id === activeTab);
+  const tabs = [
+    { id: "posts", label: "Posts", data: myPosts },
+    { id: "answers", label: "Replies", data: myAnswers },
+    { id: "highlights", label: "Highlights", data: myLiked },
+    { id: "media", label: "Media", data: myLiked },
+    { id: "likes", label: "Likes", data: myLiked },
+  ];
+
+  const activeTabData = tabs.find((t) => t.id === activeTab);
 
   return (
     <main className="flex justify-center pt-4">
@@ -47,31 +58,33 @@ const ProfileClient = () => {
           </Link>
 
           <h1 className="fixed top-4 left-[500px] z-20 text-xl font-bold text-white">
-            John Doe
+            {me ? `${me.firstName} ${me.lastName}` : "Loading..."}
           </h1>
         </div>
 
         <div
-          className="h-60 relative bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/images/cat-header.jpg')",
-            backgroundBlendMode: "overlay",
-          }}
-        >
-          <div className="absolute -bottom-12 left-6">
-            <div className="w-36 h-36 rounded-full border-4 border-black bg-gray-700 overflow-hidden">
-              <img
-                src="/images/avatar.jpg"
-                alt="Profile Avatar"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
+  className="h-60 relative w-full bg-cover bg-center"
+  style={{
+    backgroundImage: "url('/images/cat-header.jpg')",
+  }}
+>
+  <div className="absolute -bottom-12 left-6">
+    <div className="w-36 h-36 rounded-full border-4 border-black bg-gray-700 overflow-hidden">
+      <img
+        src={me?.image || "/images/avatar.jpg"}
+        alt="Profile Avatar"
+        className="w-full h-full object-cover"
+      />
+    </div>
+  </div>
+</div>
+
 
         <div className="pt-16 px-6 pb-2 border-b border-gray-800">
-          <h1 className="text-xl font-bold">John Doe</h1>
-          <p className="text-gray-400">@johndoe</p>
+          <h1 className="text-xl font-bold">
+            {me ? `${me.firstName} ${me.lastName}` : ""}
+          </h1>
+          <p className="text-gray-400">@{me?.username}</p>
 
           <div className="mt-4 flex gap-6 text-sm text-gray-400">
             <p>
@@ -116,6 +129,6 @@ const ProfileClient = () => {
       </div>
     </main>
   );
-}
+};
 
 export default ProfileClient;
