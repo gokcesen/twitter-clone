@@ -11,6 +11,21 @@ const ProfileClient = () => {
   const [activeTab, setActiveTab] = useState("posts");
   const [localTweets, setLocalTweets] = useState([]);
   const [me, setMe] = useState(null);
+  const [showAvatarModal, setShowAvatarModal] = useState(false);
+
+  const handleChooseAvatar = (img) => {
+    fetch("/api/users/update-avatar", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ image: img })
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMe((prev) => ({ ...prev, image: img }));
+        setShowAvatarModal(false);
+      })
+      .catch(console.error);
+  };
 
   useEffect(() => {
     fetch("/api/auth/me")
@@ -63,22 +78,22 @@ const ProfileClient = () => {
         </div>
 
         <div
-  className="h-60 relative w-full bg-cover bg-center"
-  style={{
-    backgroundImage: "url('/images/cat-header.jpg')",
-  }}
->
-  <div className="absolute -bottom-12 left-6">
-    <div className="w-36 h-36 rounded-full border-4 border-black bg-gray-700 overflow-hidden">
-      <img
-        src={me?.image || "/images/avatar.jpg"}
-        alt="Profile Avatar"
-        className="w-full h-full object-cover"
-      />
-    </div>
-  </div>
-</div>
-
+          className="h-60 relative w-full bg-cover bg-center"
+          style={{
+            backgroundImage: "url('/images/cat-header.jpg')",
+          }}
+        >
+          <div className="absolute -bottom-12 left-6">
+            <div className="w-36 h-36 rounded-full border-4 border-black bg-gray-700 overflow-hidden cursor-pointer">
+              <img
+                src={me?.image || "/images/avatar.jpg"}
+                alt="Profile Avatar"
+                className="w-full h-full object-cover"
+                onClick={() => setShowAvatarModal(true)}
+              />
+            </div>
+          </div>
+        </div>
 
         <div className="pt-16 px-6 pb-2 border-b border-gray-800">
           <h1 className="text-xl font-bold">
@@ -127,6 +142,38 @@ const ProfileClient = () => {
           )}
         </div>
       </div>
+
+      {showAvatarModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-[#111] rounded-lg p-6 w-[400px] shadow-xl">
+            <h2 className="text-xl font-semibold mb-4">Choose your avatar</h2>
+
+            <div className="grid grid-cols-3 gap-4">
+              {[
+                "/images/avatars/avatar-1.jpg",
+                "/images/avatars/avatar-2.jpg",
+                "/images/avatars/avatar-3.jpg",
+                "/images/avatars/avatar-4.jpeg",
+                "/images/avatars/avatar-5.jpg",
+              ].map((img) => (
+                <img
+                  key={img}
+                  src={img}
+                  className="w-24 h-24 rounded-full object-cover cursor-pointer hover:opacity-80 transition"
+                  onClick={() => handleChooseAvatar(img)}
+                />
+              ))}
+            </div>
+
+            <button
+              className="mt-6 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-white"
+              onClick={() => setShowAvatarModal(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 };
