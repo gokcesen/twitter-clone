@@ -4,25 +4,27 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import TweetCard from "@/components/tweet/TweetCard";
 import { FaArrowLeft } from "react-icons/fa";
-import { useParams } from "next/navigation";
 
 const TweetDetailsClient = ({ params }) => {
-  const { id } = useParams();
   const [tweet, setTweet] = useState(null);
 
-    const fetchTweets = async (id) => {
-    fetch(`/api/tweet/${id}`)
-      .then((res) => res.json())
-      .then((data) => setTweet(data))
-      .catch((err) => console.error(err));
+  const fetchTweets = async (id) => {
+    try {
+      const res = await fetch(`/api/tweet/${id}`);
+      const data = await res.json();
+      setTweet(data);
+    } catch (err) {
+      console.error(err);
+    }
   };
-  useEffect(() => {
-    if (id) fetchTweets(id);
-  }, [id]);
 
-  if (!tweet) {
-    return <p></p>;
-  }
+  useEffect(() => {
+    if (params?.id) {
+      fetchTweets(params.id);  
+    }
+  }, [params?.id]);
+
+  if (!tweet) return <p></p>;
 
   return (
     <main className="flex flex-col items-start ml-[450px] -mt-2 gap-4">

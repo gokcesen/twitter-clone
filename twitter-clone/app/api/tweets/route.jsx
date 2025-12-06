@@ -15,7 +15,6 @@ export async function GET() {
       externalId: { $in: userIds }
     });
 
-    console.log("FOUND USERS:", users);
 
     return Response.json({
       posts,

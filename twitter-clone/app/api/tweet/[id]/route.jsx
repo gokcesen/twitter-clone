@@ -1,36 +1,35 @@
+import connectDB from "@/lib/config/database";
+import TweetModel from "@/lib/models/TweetModel";
+import UserModel from "@/lib/models/UserModel";
+
 export async function GET(req, { params }) {
-  const { id } = await params; 
 
   try {
-    const postRes = await fetch(`https://dummyjson.com/posts/${id}`, { cache: "no-store" });
-    if (!postRes.ok) throw new Error("Tweet fetch failed");
-    const post = await postRes.json();
+    await connectDB();
 
-    const userId = post.userId;
+    const resolvedParams = await params;
+    const tweetId = Number(resolvedParams.id);
 
-    const [commentsRes, userRes] = await Promise.all([
-      fetch(`https://dummyjson.com/posts/${id}/comments`, { cache: "no-store" }),
-      fetch(`https://dummyjson.com/users/${userId}`, { cache: "no-store" }),
-    ]);
 
-    if (!commentsRes.ok) throw new Error("Comments fetch failed");
-    const commentsPayload = await commentsRes.json();
-    const user = userRes.ok ? await userRes.json() : null;
+    const tweet = await TweetModel.findOne({ id: tweetId });
+    if (!tweet) {
+      return Response.json({ error: "Tweet not found" }, { status: 404 });
+    }
 
-    const data = {
-      ...post,
-      user,
-      comments: commentsPayload?.comments ?? [],
-      totalComments: commentsPayload?.total ?? 0,
-    };
+    const user = await UserModel.findOne({ externalId: tweet.userId });
 
-    return Response.json(data);
+    return Response.json({
+      ...tweet.toObject(),
+      user: user ? user.toObject() : null,
+    });
+
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching tweet:", error);
     return Response.json(
-      { error: "Failed to fetch tweet details" },
+      { error: "Failed to fetch tweet" },
       { status: 500 }
     );
   }
 }
+
 

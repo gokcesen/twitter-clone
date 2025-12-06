@@ -45,7 +45,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   const [showModal, setShowModal] = useState(false);
 
-  const { user } = useUser(); // 🔥 useAuth yerine bu geldi
+  const { user } = useUser(); 
 
   return (
     <div className="hidden lg:block mb-5">

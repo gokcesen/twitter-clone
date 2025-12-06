@@ -7,8 +7,9 @@ export const metadata = {
   },
 };
 
-const TweetDetails = ({ params }) => {
-  return <TweetDetailsClient params={params}/>
+const TweetDetails = async ({ params }) => {
+  const resolvedParams = await params;
+  return <TweetDetailsClient params={resolvedParams}/>
 };
 
 export default TweetDetails;

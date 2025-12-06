@@ -30,12 +30,10 @@ export default function CreateTweetBox() {
 			const contentType = res.headers.get("content-type");
 			if (!contentType?.includes("application/json")) {
 				const raw = await res.text();
-				console.log("API raw:", raw);
 				throw new Error("API did not return JSON");
 			}
 
 			const data = await res.json();
-			console.log("Tweet saved:", data);
 			setText("");
 		} catch (err) {
 			console.error("Error:", err);
