@@ -14,7 +14,6 @@ import {
 } from "react-icons/hi";
 
 import Image from "next/image";
-import logo from "/public/images/x-logo.png";
 import { useState } from "react";
 import CreateTweetModal from "@/components/tweet/CreateTweetModal";
 import { useUser } from "@/contexts/UserContext";
@@ -39,7 +38,7 @@ export default function Sidebar() {
       <aside className="fixed top-0 left-36 h-screen w-[300px] bg-[#0a0a0a] border-r border-zinc-800 text-white flex flex-col items-start p-6 space-y-4 shadow-lg">
         
         <div className="px-2">
-          <Image src={logo} alt="Icon" width={36} height={36} />
+          <Image src="/images/x-logo.png" alt="Icon" width={36} height={36} />
         </div>
 
         {navLinks.map((link) => (
