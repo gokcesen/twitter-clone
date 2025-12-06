@@ -67,18 +67,18 @@ const ProfileClient = () => {
         <div className="flex items-center gap-2 px-6 mb-2 relative">
           <Link
             href="/home"
-            className="fixed top-4 left-[460px] z-20 flex items-center gap-2 text-white hover:text-sky-400 transition-colors"
+            className="fixed top-4 left-[460px] z-10 flex items-center gap-2 text-white hover:text-sky-400 transition-colors"
           >
             <FaArrowLeft size={24} className="drop-shadow-md" />
           </Link>
 
-          <h1 className="fixed top-4 left-[500px] z-20 text-xl font-bold text-white">
+          <h1 className="fixed top-4 left-[500px] z-10 text-xl font-bold text-white">
             {me ? `${me.firstName} ${me.lastName}` : "Loading..."}
           </h1>
         </div>
 
         <div
-          className="h-60 relative w-full bg-cover bg-center"
+          className="h-60 relative w-full bg-cover bg-center z-0"
           style={{
             backgroundImage: "url('/images/cat-header.jpg')",
           }}

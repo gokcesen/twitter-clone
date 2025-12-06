@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 export default function CreateTweetModal({ show, onClose }) {
 	const [tweetText, setTweetText] = useState("");
@@ -38,9 +39,9 @@ export default function CreateTweetModal({ show, onClose }) {
 	
 	  if (!show) return null;
 
-	return (
-		<div className="fixed inset-0 bg-[#0a0a0a] bg-opacity-50 flex justify-center items-start pt-24 z-50">
-			<div className="bg-[#0a0a0a] rounded-xl w-full max-w-lg p-6 shadow-lg relative border border-zinc-500">
+	const modalContent = (
+		<div className="fixed inset-0 bg-[#0a0a0a] bg-opacity-50 flex justify-center items-start pt-24 z-[9999]">
+			<div className="bg-[#0a0a0a] rounded-xl w-full max-w-lg p-6 shadow-lg relative border border-zinc-500 z-[10000]">
 				<button
 					onClick={onClose}
 					className="absolute top-4 right-4 text-white font-bold text-xl hover:text-red-500 transition-colors"
@@ -96,4 +97,11 @@ export default function CreateTweetModal({ show, onClose }) {
 			</div>
 		</div>
 	);
+
+	// Render modal in a portal to ensure it's above everything
+	if (typeof window !== 'undefined') {
+		return createPortal(modalContent, document.body);
+	}
+	
+	return null;
 }
