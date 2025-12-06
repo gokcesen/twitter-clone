@@ -19,7 +19,7 @@ import CreateTweetModal from "@/components/tweet/CreateTweetModal";
 import { useUser } from "@/contexts/UserContext";
 
 const navLinks = [
-  { name: "Home", href: "/home", icon: HiOutlineHome, filledIcon: HiHome },
+  { name: "Homeeey", href: "/home", icon: HiOutlineHome, filledIcon: HiHome },
   { name: "Explore", href: "/explore", icon: HiOutlineSearch, filledIcon: HiSearch },
   { name: "Bookmarks", href: "/bookmarks", icon: HiOutlineBookmark, filledIcon: HiBookmark },
   { name: "Profile", href: "/profile", icon: HiOutlineUser, filledIcon: HiUser },
