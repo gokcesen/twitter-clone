@@ -3,15 +3,13 @@
 import { useState } from "react";
 import { FiImage, FiSmile, FiMapPin } from "react-icons/fi";
 import { TbGif } from "react-icons/tb";
-import { useAuth } from "@/contexts/AuthContext";
-
-
+import { useUser } from "@/contexts/UserContext";
 
 
 export default function CreateTweetBox() {
 	const [text, setText] = useState("");
 	const [isPosting, setIsPosting] = useState(false);
-	const { user } = useAuth();
+	const { user } = useUser();
 
 	const avatarSrc = user?.image || "/images/default-avatar.jpeg";
 

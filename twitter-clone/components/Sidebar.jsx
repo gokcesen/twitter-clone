@@ -17,10 +17,14 @@ import Image from "next/image";
 import logo from "/public/images/x-logo.png";
 import { useState } from "react";
 import CreateTweetModal from "@/components/tweet/CreateTweetModal";
-import { useUser } from "@/contexts/UserContext"; // 🔥 EKLENDİ
+import { useUser } from "@/contexts/UserContext"; 
 
 const navLinks = [
-  { name: "Home", href: "/", icon: HiOutlineHome, filledIcon: HiHome },
+  { name: "Home", 
+    href: "/home", 
+    icon: HiOutlineHome, 
+    filledIcon: HiHome 
+  },
   {
     name: "Explore",
     href: "/explore",
@@ -57,7 +61,7 @@ export default function Sidebar() {
         {navLinks.map((link) => (
           <Link
             key={link.href}
-            href={link.href}
+            href={{ pathname: link.href }}
             className={`
               flex items-center gap-4
               px-4 py-2 rounded w-fit text-left
@@ -96,7 +100,7 @@ export default function Sidebar() {
         >
           <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-700 flex-shrink-0">
             <img
-              src={user?.image || "/images/default-avatar.jpeg"} // 🔥 Avatar artık userContext’ten
+              src={user?.image || "/images/default-avatar.jpeg"}
               alt="User avatar"
               className="w-full h-full object-cover"
             />
