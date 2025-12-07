@@ -4,17 +4,18 @@ import { BookmarkProvider } from "../contexts/BookmarkContext";
 import { RepostProvider } from "../contexts/RepostContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { UserProvider } from "@/contexts/UserContext";
+import { LikeProvider } from "@/contexts/LikeContext";
 
 export default function Providers({ children }) {
-  return (
-    <AuthProvider>
-      <UserProvider>
-        <BookmarkProvider>
-          <RepostProvider>
-            {children}
-          </RepostProvider>
-        </BookmarkProvider>
-      </UserProvider>
-    </AuthProvider>
-  );
+	return (
+		<AuthProvider>
+			<UserProvider>
+				<LikeProvider>
+					<BookmarkProvider>
+						<RepostProvider>{children}</RepostProvider>
+					</BookmarkProvider>
+				</LikeProvider>
+			</UserProvider>
+		</AuthProvider>
+	);
 }

@@ -4,12 +4,16 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import { useReposts } from "@/contexts/RepostContext";
+import { useLikes } from "@/contexts/LikeContext";
 import TweetCard from "@/components/tweet/TweetCard";
 
 const ProfileClient = () => {
   const { reposts } = useReposts();
+  const { likes } = useLikes();
+
   const [activeTab, setActiveTab] = useState("posts");
   const [localTweets, setLocalTweets] = useState([]);
+  const [allTweets, setAllTweets] = useState([]);
   const [me, setMe] = useState(null);
   const [showAvatarModal, setShowAvatarModal] = useState(false);
 
@@ -38,7 +42,10 @@ const ProfileClient = () => {
     fetch("/api/tweets")
       .then((res) => res.json())
       .then((data) => {
+        setAllTweets(data.posts || []);
+  
         if (!me) return;
+  
         const onlyMine = (data.posts || [])
           .filter((t) => t.userId === me.externalId)
           .map((t) => ({
@@ -50,11 +57,12 @@ const ProfileClient = () => {
               image: me.image
             }
           }));
+  
         setLocalTweets(onlyMine);
       })
       .catch(console.error);
-  }, [me]);
-
+  }, [me, likes]);  
+  
 
   const myPosts = [...localTweets, ...reposts].map((t) => ({
     ...t,
@@ -67,18 +75,25 @@ const ProfileClient = () => {
     displayedAt: t.repostAt || t.createdAt
   }));
 
-  myPosts.sort(
-    (a, b) => new Date(b.displayedAt) - new Date(a.displayedAt)
-  );
+  myPosts.sort((a, b) => new Date(b.displayedAt) - new Date(a.displayedAt));
+
+  const myLiked = likes
+  .map((tweet) => ({
+    ...tweet,
+    likedAt: tweet.likedAt
+  }))
+  .sort((a, b) => b.likedAt - a.likedAt);
+
 
   const myAnswers = [];
-  const myLiked = [];
+  const myHighlights = []; 
+  const myMedia = []; 
 
   const tabs = [
     { id: "posts", label: "Posts", data: myPosts },
     { id: "answers", label: "Replies", data: myAnswers },
-    { id: "highlights", label: "Highlights", data: myLiked },
-    { id: "media", label: "Media", data: myLiked },
+    { id: "highlights", label: "Highlights", data: myHighlights },
+    { id: "media", label: "Media", data: myMedia },
     { id: "likes", label: "Likes", data: myLiked }
   ];
 
