@@ -1,4 +1,5 @@
 import ProfileClient from "./ProfileClient";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 export const metadata = {
   title: "Profile Page – Twitter Clone",
@@ -8,7 +9,11 @@ export const metadata = {
 };
 
 const ProfilePage = () => {
-	return <ProfileClient />
+	return (
+    <ProtectedRoute>
+       <ProfileClient />
+    </ProtectedRoute>
+  );
 }
 
 export default ProfilePage;
