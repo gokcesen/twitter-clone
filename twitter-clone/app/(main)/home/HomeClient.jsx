@@ -45,11 +45,10 @@ const HomeClient = () => {
 	return (
 		<div className="font-sans grid grid-rows-[20px_1fr_20px] min-h-screen p-2 pb-20 gap-16 sm:p-20">
 			<Sidebar />
-			<main className="flex flex-col items-start mx-auto">
+			<Header />
+			<main className="flex flex-col items-center">
 				<div className="flex flex-col gap-y-0 row-start-2 items-center sm:items-start ml-60">
-					<Header />
-					<CreateTweetBox />
-
+				<CreateTweetBox />	
 					{tweets.map((tweet) => {
 						const user = userMap[tweet.userId];
 						return (

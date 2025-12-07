@@ -41,15 +41,14 @@ export default function CreateTweetBox() {
 	};
 
 	return (
-		<div className="flex w-[800px] top-0 border-b border-neutral-800 px-4 pt-0 pb-4 -mt-32 text-white">
-			<div className="mr-4 -mt-4 ml-2">
-				<div className="w-14 h-14 rounded-full overflow-hidden bg-gray-700 flex-shrink-0">
+		<div className="flex min-w-[800px] top-0 border-b border-neutral-800 px-4 pb-4 -mt-32 text-white">
+			<div className="w-14 h-14 rounded-full overflow-hidden bg-gray-700 flex-shrink-0 mr-4 -mt-4 ml-2">
+
 					<img
 						src={avatarSrc}
 						alt="User avatar"
 						className="w-full h-full object-cover"
 					/>
-				</div>
 			</div>
 
 			<div className="flex flex-col w-full">
