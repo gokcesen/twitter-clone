@@ -20,7 +20,7 @@ const ProfileClient = () => {
       body: JSON.stringify({ image: img })
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(() => {
         setMe((prev) => ({ ...prev, image: img }));
         setShowAvatarModal(false);
       })
@@ -39,15 +39,38 @@ const ProfileClient = () => {
       .then((res) => res.json())
       .then((data) => {
         if (!me) return;
-        const onlyMine = (data.posts || []).filter(
-          (t) => t.userId === me.externalId
-        );
+        const onlyMine = (data.posts || [])
+          .filter((t) => t.userId === me.externalId)
+          .map((t) => ({
+            ...t,
+            user: {
+              firstName: me.firstName,
+              lastName: me.lastName,
+              username: me.username,
+              image: me.image
+            }
+          }));
         setLocalTweets(onlyMine);
       })
       .catch(console.error);
   }, [me]);
 
-  const myPosts = [...localTweets, ...reposts];
+
+  const myPosts = [...localTweets, ...reposts].map((t) => ({
+    ...t,
+    user: t.user || {
+      firstName: me?.firstName,
+      lastName: me?.lastName,
+      username: me?.username,
+      image: me?.image
+    },
+    displayedAt: t.repostAt || t.createdAt
+  }));
+
+  myPosts.sort(
+    (a, b) => new Date(b.displayedAt) - new Date(a.displayedAt)
+  );
+
   const myAnswers = [];
   const myLiked = [];
 
@@ -56,7 +79,7 @@ const ProfileClient = () => {
     { id: "answers", label: "Replies", data: myAnswers },
     { id: "highlights", label: "Highlights", data: myLiked },
     { id: "media", label: "Media", data: myLiked },
-    { id: "likes", label: "Likes", data: myLiked },
+    { id: "likes", label: "Likes", data: myLiked }
   ];
 
   const activeTabData = tabs.find((t) => t.id === activeTab);
@@ -86,7 +109,7 @@ const ProfileClient = () => {
           <div className="absolute -bottom-12 left-6">
             <div className="w-36 h-36 rounded-full border-4 border-black bg-gray-700 overflow-hidden cursor-pointer">
               <img
-                src={me?.image || "/images/avatar.jpg"}
+                src={me?.image || "/images/default-avatar.jpeg"}
                 alt="Profile Avatar"
                 className="w-full h-full object-cover"
                 onClick={() => setShowAvatarModal(true)}
@@ -155,6 +178,7 @@ const ProfileClient = () => {
                 "/images/avatars/avatar-3.jpg",
                 "/images/avatars/avatar-4.jpeg",
                 "/images/avatars/avatar-5.jpg",
+                "/images/avatars/avatar.jpg"
               ].map((img) => (
                 <img
                   key={img}

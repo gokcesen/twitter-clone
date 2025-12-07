@@ -1,10 +1,25 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const RepostContext = createContext();
 
 export function RepostProvider({ children }) {
-  const [reposts, setReposts] = useState([]); 
+  const [reposts, setReposts] = useState(null);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("reposts");
+    if (saved) {
+      setReposts(JSON.parse(saved));
+    } else {
+      setReposts([]); 
+    }
+  }, []);
+
+  useEffect(() => {
+    if (reposts !== null) {
+      localStorage.setItem("reposts", JSON.stringify(reposts));
+    }
+  }, [reposts]);
 
   const toggleRepost = (tweet) => {
     setReposts((prev) => {
@@ -12,13 +27,16 @@ export function RepostProvider({ children }) {
       if (exists) {
         return prev.filter((t) => t.id !== tweet.id);
       }
-      return [...prev, tweet];
+      return [...prev, { ...tweet, repostAt: new Date().toISOString() }];
     });
   };
 
   const isReposted = (id) => {
+    if (reposts === null) return false;
     return reposts.some((t) => t.id === id);
   };
+
+  if (reposts === null) return null; 
 
   return (
     <RepostContext.Provider value={{ reposts, toggleRepost, isReposted }}>

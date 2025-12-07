@@ -18,7 +18,7 @@ const TweetCard = ({ tweet }) => {
 						/>
 					) : (
 						<img
-							src="/images/avatar.jpg"
+							src="/images/default-avatar.jpeg"
 							alt="avatar"
 							className="w-full h-full object-cover"
 						/>
