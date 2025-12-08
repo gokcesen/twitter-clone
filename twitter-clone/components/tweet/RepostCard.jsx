@@ -3,7 +3,7 @@
 import TweetCard from "@/components/tweet/TweetCard";
 import TweetActions from "./TweetActions";
 
-const RepostCard = ({ tweet, me }) => {
+const RepostCard = ({ tweet, me, onQuote }) => {
 	return (
 		<>
 
@@ -28,7 +28,7 @@ const RepostCard = ({ tweet, me }) => {
 				<TweetCard tweet={tweet} small />
 			</div>
             <div className="mt-4"> 
-    <TweetActions tweet={tweet} />
+    <TweetActions tweet={tweet} onQuote={on}/>
   </div>
 		</>
 	);

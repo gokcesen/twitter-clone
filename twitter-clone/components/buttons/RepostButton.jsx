@@ -2,10 +2,12 @@
 import { FiRepeat } from "react-icons/fi";
 import { useReposts } from "@/contexts/RepostContext";
 import { useState, useEffect, useRef } from "react";
+import RepostModal from "@/components/tweet/RepostModal";
 
 const RepostButton = ({ tweet }) => {
   const { toggleRepost, isReposted } = useReposts();
   const [openMenu, setOpenMenu] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const menuRef = useRef(null);
 
   const active = tweet ? isReposted(tweet.id) : false;
@@ -26,10 +28,34 @@ const RepostButton = ({ tweet }) => {
   const handleQuote = (e) => {
     e.preventDefault();
     e.stopPropagation();
-  
-    toggleRepost({ ...tweet, quoted: true });
-  
+    setShowModal(true);
     setOpenMenu(false);
+  };
+
+  const handleQuoteSubmit = async (comment) => {
+    try {
+      // Create a new tweet with the quote comment
+      const response = await fetch("/api/tweets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: comment }),
+      });
+
+      if (response.ok) {
+        const newTweet = await response.json();
+        // Mark the original tweet as quoted in reposts with the comment text
+        toggleRepost({ 
+          ...tweet, 
+          quoted: true, 
+          quoteComment: comment,
+          quoteTweetId: newTweet.id 
+        });
+      }
+    } catch (error) {
+      console.error("Error creating quote tweet:", error);
+    }
   };
   
 
@@ -83,6 +109,13 @@ const RepostButton = ({ tweet }) => {
 
         </div>
       )}
+
+      <RepostModal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        tweet={tweet}
+        onSubmit={handleQuoteSubmit}
+      />
     </div>
   );
 };
