@@ -26,8 +26,12 @@ const RepostButton = ({ tweet }) => {
   const handleQuote = (e) => {
     e.preventDefault();
     e.stopPropagation();
+  
+    toggleRepost({ ...tweet, quoted: true });
+  
     setOpenMenu(false);
   };
+  
 
   useEffect(() => {
     const handleClickOutside = (e) => {

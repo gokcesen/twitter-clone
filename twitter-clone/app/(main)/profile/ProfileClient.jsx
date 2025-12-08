@@ -7,7 +7,7 @@ import { useReposts } from "@/contexts/RepostContext";
 import { useLikes } from "@/contexts/LikeContext";
 import TweetCard from "@/components/tweet/TweetCard";
 import { FiRepeat } from "react-icons/fi";
-
+import RepostCard from "@/components/tweet/RepostCard";
 
 const ProfileClient = () => {
 	const { reposts } = useReposts();
@@ -173,14 +173,18 @@ const ProfileClient = () => {
 					) : (
 						activeTabData.data.map((tweet, index) => (
 							<div key={tweet.id || tweet.body || index}>
-								{activeTab === "posts" && tweet.repostAt && (
+								{activeTab === "posts" && tweet.repostAt && !tweet.quoted && (
 									<div className="flex items-center text-sm text-gray-500 ml-14 -mb-4 gap-1 mt-4">
-                  <FiRepeat size={12} />
-                  <span>You reposted</span>
-                </div>
-                
+										<FiRepeat size={12} />
+										<span>You reposted</span>
+									</div>
 								)}
-								<TweetCard tweet={tweet} />
+
+								{tweet.quoted ? (
+									<RepostCard tweet={tweet} me={me}/>
+								) : (
+									<TweetCard tweet={tweet} />
+								)}
 								<div className="border-b border-zinc-800 w-[1080px] ml-[-24px]" />
 							</div>
 						))
