@@ -9,7 +9,7 @@ const TweetCard = ({ tweet, small = false }) => {
     <div
       className={`
         ${small ? "p-3" : "p-6"} 
-        max-w-full 
+        max-w-[800px] 
         mb-2
       `}
     >
